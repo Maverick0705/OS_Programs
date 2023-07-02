@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<unistd.h>
+#include<stdlib.h> 
+#include<sys/wait.h> 
+
+int main()
+{
+    printf("Ritesh Bhatt\t 20011355\tSection: J\tRoll no:43\n");
+    int p,n,i,sum=0;
+    printf("Enter size: ");
+    scanf("%d",&n); int arr[n];
+    printf("Enter elements: "); 
+    for(i=0;i<n;i++)scanf("%d",&arr[i]);
+
+    p=fork();
+    if(p<0)
+    {
+    printf("failed to create child\n"); exit(1);
+    }
+    else if(p==0){
+    printf("\nchild process :: "); 
+    for(i = 0;i<n;i++)
+    if(arr[i]%2!=0)
+    {
+        sum+=arr[i];
+    }
+    printf("\n\tsum: %d",sum);
+    }
+    else if(p>0){ 
+    wait(NULL);
+    printf("\nParent process :: ");
+    for(i = 0;i<n;i++)
+        if(arr[i]%2==0){ 
+        sum+=arr[i];
+        }
+    printf("\n\tsum: %d\n",sum);
+    }
+
+return 0;
+}

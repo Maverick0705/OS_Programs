@@ -1,0 +1,47 @@
+#include<stdio.h>  
+int main()  
+{  
+    int arr[] = {4 , 1 , 2 , 4 , 5};  
+    int pf = 0;  
+    int f = 3;  
+    int i, j, s, pg;   
+    pg = sizeof(arr)/sizeof(arr[0]);   
+    printf(" Incoming \t Frame 1 \t Frame 2 \t Frame 3 ");  
+    int temp[ f ];  
+    for(i = 0; i < f; i++)  
+    {  
+        temp[i] = -1;               
+    }  
+    for(i = 0; i < pg; i++)  
+    {  
+        s = 0;   
+        for(j = 0; j < f; j++)  
+        {  
+            if(arr[i] == temp[j])  
+            {  
+                s++;  
+                pf--;  
+            }  
+        }  
+        pf++;  
+        if((pf <= f) && (s == 0))  
+        {  
+            temp[i] = arr[i];  
+        }  
+        else if(s == 0)  
+        {  
+            temp[(pf - 1) % f] = arr[i];  
+        }  
+        printf("\n");  
+        printf("%d\t\t\t",arr[i]);  
+        for(j = 0; j < f; j++)  
+        {  
+            if(temp[j] != -1)  
+                printf(" %d\t\t\t", temp[j]);  
+            else  
+                printf(" - \t\t\t");  
+        }  
+    }  
+    printf("\nTotal Page Faults:\t%d\n", pf);  
+    return 0;  
+}  
